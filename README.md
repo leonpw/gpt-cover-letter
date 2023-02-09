@@ -1,16 +1,27 @@
 # GPT 
 
+## Introduction
+
+This application uses OpenAI GPT to write cover letters for you. Fill in the position, company and the job description you are applying for and it generates a cover letter.
+
 ## Usage
 
-This is the source of 
+See for yourself:
+
+![preview](Write%20me%20a%20cover%20letter.png)
+
+Or try the [demo](https://cover-letter.wieisleon.nl)
+
+
 
 ## Development
+
 
 ### Requirements
 
 You need to have an account at OpenAi. This can be a free account. 
 
-Get API Key [here](https://platform.openai.com/account/api-keys)
+Get your API Key [here](https://platform.openai.com/account/api-keys)
 
 
 Configure API key in `.env.local` (see `.example.env.local`):
@@ -18,6 +29,8 @@ Configure API key in `.env.local` (see `.example.env.local`):
 ```
 GPT_API_KEY=open-ai-api-GPT_API_KEY
 ```
+
+For logging I use Azure Tables with SAS authorization. You can skip this step if you don't want to have logging. It will log to a file as well.
 
 ### To run the app
 
@@ -42,3 +55,8 @@ npm run dev
 ```
 
 4. Now open http://localhost:3000 to view and use the app
+
+
+## Credits
+
+This application is inspired by [RoadAround.io](https://www.roamaround.io/) of [Nader](https://nader.arweave.dev/)!

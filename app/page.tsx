@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+import { Logger } from 'winston'
 
 export default function Home() {
   const [request, setRequest] = useState<{description?: string, position?: string, company?: string}>({})
@@ -20,6 +21,20 @@ export default function Home() {
 
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
+
+  async function log() {
+    console.log(`Someone clicked`)
+    const response = await fetch('/api/log', {
+      method: 'POST',
+      body: JSON.stringify({
+        company: request.company,
+        position: request.position,
+        description: request.description,
+      })
+    })
+    const json = await response.json()
+  }
+
   async function hitAPI() {
     try {
       if (!request.description || !request.position || !request.company) return
@@ -58,7 +73,8 @@ export default function Home() {
     }
   }
   
-  
+  const dev = process.env.NODE_ENV == "development"
+
   return (
     <main>
       <div className="app-container">
@@ -73,16 +89,23 @@ export default function Home() {
     
         </p>      
 
-          <input style={styles.input}  placeholder="Position" onChange={e => setRequest(request => ({
+          <input style={styles.input}  placeholder="Position" onChange={e => 
+          setRequest(request => ({
             ...request, position: e.target.value
           }))} />
           <input style={styles.input} placeholder="Company" onChange={e => setRequest(request => ({
             ...request, company: e.target.value
           }))} />
-          <textarea style={styles.inputtextarea} placeholder="Job description" onChange={e => setRequest(request => ({
+          <textarea style={styles.inputtextarea} placeholder="Job description (Copy from job board)" onChange={e => setRequest(request => ({
             ...request, description: e.target.value
           }))} />
           <button className="input-button"  onClick={hitAPI}>Let AI write my Cover Letter!</button>
+          
+          {
+        dev && (
+          <button className='input-button' onClick={log} > log </button>
+        )
+        }
         </div>
         <div className="results-container">
         {

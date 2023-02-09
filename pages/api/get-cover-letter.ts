@@ -1,4 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import logInfo, { logError } from '@/app/services/logger'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 type Data = {
@@ -29,9 +30,10 @@ export default async function handler(
     company = body.company
     description = body.description
 
-    console.log(`position: ${position}`)
-    console.log(`company: ${company}`)
-    console.log(`description: ${description}`)
+    logInfo(`${req.body}`)
+    logInfo(`${req.rawHeaders}`)
+    logInfo(`${req.connection.remoteAddress}`)
+
   }
 
   let basePrompt = `Write me a cover letter for the position of ${position} at ${company} with the following job description: ${description}`
@@ -51,11 +53,10 @@ export default async function handler(
     const coverletter = await response.json()
 
     if (coverletter.error) {
-      console.log(`an error occured: ${coverletter.error}`)
+      logError(coverletter.error)
     }
     else {
-      console.log(`coverletter: ${coverletter.choices[0].text}`)
-
+      logInfo(coverletter.choices[0].text)
     }
 
     res.status(200).json({
@@ -63,8 +64,8 @@ export default async function handler(
       coverletter: coverletter.choices[0].text
     })
     
-
   } catch (err) {
     console.log('error: ', err)
+    logError(`${err}`)
   }
 }
