@@ -1,14 +1,14 @@
-# GPT 
+# GPT Cover Letter
 
 ## Introduction
 
-This application uses OpenAI GPT to write cover letters for you. Fill in the position, company and the job description you are applying for and it generates a cover letter.
+This application uses OpenAI GPT to write a cover letter for you. Fill in the position, company and the job description you are applying for and it generates a cover letter.
 
 ## Usage
 
 See for yourself:
 
-![preview](Write%20me%20a%20cover%20letter.png)
+![preview](example.png)
 
 Or try the [demo](https://cover-letter.wieisleon.nl)
 
