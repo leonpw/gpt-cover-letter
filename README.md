@@ -6,7 +6,8 @@ This application uses OpenAI GPT to write a cover letter for you. Fill in the po
 
 ## Usage
 
-See for yourself:
+You can try out the demo for free and as long as my OpenAi credits lasts!
+
 
 ![preview](example.png)
 
