@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import { Logger } from 'winston'
+
 
 export default function Home() {
   const [request, setRequest] = useState<{description?: string, position?: string, company?: string}>({})
@@ -21,6 +21,8 @@ export default function Home() {
 
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
+  const [showError, setShowError] = useState(false)
+  const [errorText, setErrorText] = useState('')
 
   async function log() {
     console.log(`Someone clicked`)
@@ -40,6 +42,7 @@ export default function Home() {
       if (!request.description || !request.position || !request.company) return
       
       setMessage('Building cover letter...')
+      setShowError(false)
       setLoading(true)
       setCoverletter('')
 
@@ -61,15 +64,37 @@ export default function Home() {
           description: request.description,
         })
       })
-      const json = await response.json()
-      
-      let coverletter = json.coverletter
+      .then(function(response) {                      // first then()
+        if(response.ok)
+        {
+          return response.json();         
+        }
+        throw new Error('Something went wrong.');
+      })  
+      .then((data) => {
 
-      setCoverletter(coverletter)
-      setLoading(false)
+        if(data.coverletter != undefined){
+
+          let coverletter = data.coverletter
+          setCoverletter(coverletter)
+          setShowError(false)
+          setLoading(false)
+        }
+        if(data.message != undefined) {
+          setCoverletter('')
+          setErrorText(data.message)
+          setShowError(true)
+          setLoading(false)
+        }
+      })
+
+
     } catch (err) {
-      console.log('error: ', err)
-      setMessage('')
+      
+      setLoading(false)
+      setShowError(true)
+      setCoverletter('')
+      setErrorText('An error occured')
     }
   }
   
@@ -112,12 +137,18 @@ export default function Home() {
           loading && (
             <p>{message}</p>
           )
+          }
+           
+        { 
+          showError&& (
+            <p>{errorText}</p>
+          )
         }
       {
         <ReactMarkdown className='foo'
         remarkPlugins={[remarkGfm]}
         >
-          {`${coverletter.replace(/\n/g, "  \n&nbsp;  ")}`}
+          {`${coverletter?.replace(/\n/g, "  \n&nbsp;  ")}`}
           </ReactMarkdown>
         
       }

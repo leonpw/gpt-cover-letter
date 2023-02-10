@@ -32,7 +32,6 @@ export default async function handler(
 
     logInfo(`${req.body}`)
     logInfo(`${req.rawHeaders}`)
-    logInfo(`${req.connection.remoteAddress}`)
 
   }
 
@@ -50,22 +49,23 @@ export default async function handler(
       })
     })
 
-    const coverletter = await response.json()
+    const json = await response.json()
 
-    if (coverletter.error) {
-      logError(coverletter.error)
+    if (json.error) {
+      logError(json.error.message)
+      res.status(200).json({
+        message: 'Something went wrong!',
+      })
     }
     else {
-      logInfo(coverletter.choices[0].text)
+      logInfo(json.choices[0].text)
+      
+      res.status(200).json({
+        coverletter: json.choices[0].text
+      })
     }
-
-    res.status(200).json({
-      message: 'success',
-      coverletter: coverletter.choices[0].text
-    })
     
   } catch (err) {
-    console.log('error: ', err)
     logError(`${err}`)
   }
 }
