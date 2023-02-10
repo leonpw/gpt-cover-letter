@@ -9,7 +9,7 @@ This application uses OpenAI GPT to write a cover letter for you. Fill in the po
 You can try out the demo for free and as long as my OpenAi credits lasts!
 
 
-![preview](example.png)
+[![preview](https://cover-letter.wieisleon.nl)](example.png)
 
 Or try the [demo](https://cover-letter.wieisleon.nl)
 
@@ -60,4 +60,4 @@ npm run dev
 
 ## Credits
 
-This application is inspired by [RoadAround.io](https://www.roamaround.io/) of [Nader](https://nader.arweave.dev/)!
+This application is inspired by [RoamAround.io](https://www.roamaround.io/) of [Nader](https://nader.arweave.dev/)!
