@@ -1,17 +1,13 @@
 
-# Build a Node.js project that uses React.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-
 trigger:
 - azure-pipelines
 
-steps:
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: |
-      # Write your commands here
-      
-      echo 'Hello world'
-      ls -hal
+stages:
+  - stage: Deploy
+    pool:
+      name: QEMU1
+    jobs:
+      - job: BuildJob
+        steps:
+          - script: echo Building!
+          
