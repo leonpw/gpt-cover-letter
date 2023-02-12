@@ -9,5 +9,11 @@ stages:
     jobs:
       - job: BuildJob
         steps:
-          - script: echo Building!
+          - script: docker build . -t coverletter
           
+          
+          - task: PublishBuildArtifacts@1
+            inputs:
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+              ArtifactName: 'drop'
+              publishLocation: 'Container'
