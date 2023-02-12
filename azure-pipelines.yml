@@ -5,7 +5,7 @@ trigger:
 stages:
   - stage: Deploy
     pool:
-      name: QEMU1
+      name: qemu
     jobs:
       - job: BuildJob
         steps:
