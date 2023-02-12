@@ -145,6 +145,14 @@ input {
   background-color: white;
 }
 
+
+.buildid {
+  color: grey;
+  font-size: 10px;
+  position: absolute;
+  right: 0px;
+}
+
 @media screen and (max-width: 500px) {
   .form-container {
     width: 100%;

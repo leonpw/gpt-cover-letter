@@ -35,7 +35,7 @@ export default async function handler(
 
   }
 
-  let basePrompt = `Write me a cover letter for the position of ${position} at ${company} with the following job description: ${description}`
+  let basePrompt = `Write me a cover letter in the same language as the description for the position of ${position} at ${company} with the following job description: ${description}`
   try {
 
     const response = await fetch('https://api.openai.com/v1/completions', {

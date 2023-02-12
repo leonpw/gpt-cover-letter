@@ -25,6 +25,10 @@ export default function RootLayout({
             <p>
              Built with 🫶 by <a target="_blank" rel="no-opener" href="https://wieisleon.nl/">Leon de Pruyssenaere de la Woestijne</a> <a className="sponsor" target="_blank" rel="no-opener" href="https://github.com/leonpw/gpt-cover-letter"> 💸 Sponsor this project </a>
             </p>
+            <p className='buildid'>
+              BuildId: [{process.env.BUILD_BUILDNUMBER}]
+
+            </p>
         </footer>
       </body>
     </html>
