@@ -6,9 +6,6 @@
 trigger:
 - azure-pipelines
 
-pool:
-  vmImage: db0t3
-
 steps:
 - task: Bash@3
   inputs:
